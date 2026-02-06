@@ -261,23 +261,26 @@
 
         async function processPDF() {
             const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
+            
             const colab = document.getElementById('colaborador').value;
             const lider = document.getElementById('lider').value;
 
-            if (!colab) {
-                alert("Por favor, preencha o Nome do Colaborador.");
+            if (colab.trim() === "") {
+                alert("O nome do colaborador é obrigatório.");
                 return;
             }
-            if (!lider) {
-                alert("Por favor, selecione um Líder.");
+
+            if (lider === "") {
+                alert("Por favor, selecione um líder.");
                 return;
             }
+
             if (signaturePad.isEmpty()) {
                 alert("A assinatura é obrigatória. Por favor, assine antes de gerar o PDF.");
                 return;
             }
+            
+            const doc = new jsPDF();
 
             // Cabeçalho e Conteúdo do PDF
             doc.setFillColor(26, 26, 26);
