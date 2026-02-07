@@ -18,7 +18,6 @@ body {
     margin: 0;
 }
 
-/* Área de acesso do líder */
 .leader-access {
     width: 100%;
     max-width: 700px;
@@ -89,6 +88,11 @@ input, select, textarea {
     outline: none;
 }
 
+/* Validação Visual */
+input:invalid, select:invalid {
+    border-color: var(--ituano-red);
+}
+
 .helper-text {
     background: #fff5f5;
     border: 1px dashed var(--ituano-red);
@@ -101,7 +105,7 @@ input, select, textarea {
 
 .signature-area {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr; /* Apenas uma coluna agora */
     gap: 15px;
     padding: 15px;
     text-align: center;
@@ -150,14 +154,52 @@ canvas {
     color: #666;
     font-size: 12px;
     border: 1px solid #ddd;
-    width: auto !important; /* Ajuste para o botão do líder */
+    width: auto !important;
 }
 
+/* Modais e Overlays */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.success-message {
+    color: #2e7d32;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Responsividade */
 @media (max-width: 480px) {
     .form-grid { grid-template-columns: 1fr; }
     .full-width { grid-column: span 1; }
     .triple-grid { grid-template-columns: 1fr !important; }
-    .signature-area { grid-template-columns: 1fr; }
 }
 
 /* Estilos específicos para a página de login */

@@ -221,7 +221,7 @@ async function criarDocumentoPDF(dados) {
     doc.rect(20, 90, 170, 7, 'F');
     doc.setFontSize(9);
     doc.text("OPÇÃO B: MÚLTIPLOS DIAS / PERÍODO", 25, 95);
-    doc.setFontSize(10);
+    doc.setFontSize(9);
     
     if (dados.opcaoB) {
         const splitMulti = doc.splitTextToSize(dados.opcaoB, 170);
@@ -231,22 +231,22 @@ async function criarDocumentoPDF(dados) {
     }
 
     doc.setFontSize(9);
-    doc.text("MOVIMENTAÇÃO (Assinalar):", 20, 145);
-    doc.text("(  ) Abonar Horas    (  ) Compensar    (  ) Hora Extra", 20, 152);
-    doc.text("(  ) Banco de Horas  (  ) Descontar Horas (  ) Descontar + DSR", 20, 159);
+    doc.text("MOVIMENTAÇÃO (Assinalar):", 20, 190);
+    doc.text("(  ) Abonar Horas    (  ) Compensar    (  ) Hora Extra", 20, 197);
+    doc.text("(  ) Banco de Horas  (  ) Descontar Horas (  ) Descontar + DSR", 20, 202);
 
-    doc.line(20, 200, 90, 200);
-    doc.text("Assinatura Funcionário", 35, 205);
+    doc.line(20, 240, 90, 240);
+    doc.text("Assinatura Funcionário", 35, 245);
     
     if (dados.assinaturaColaborador) {
-        try { doc.addImage(dados.assinaturaColaborador, 'PNG', 30, 170, 50, 20); } catch(e){}
+        try { doc.addImage(dados.assinaturaColaborador, 'PNG', 30, 215, 50, 20); } catch(e){}
     }
 
-    doc.line(120, 200, 190, 200);
-    doc.text("Assinatura da Gestão", 135, 205);
+    doc.line(120, 240, 190, 240);
+    doc.text("Assinatura da Gestão", 135, 245);
 
     if (dados.assinaturaLider) {
-        try { doc.addImage(dados.assinaturaLider, 'PNG', 130, 170, 50, 20); } catch(e){}
+        try { doc.addImage(dados.assinaturaLider, 'PNG', 130, 215, 50, 20); } catch(e){}
     }
 
     return doc;
