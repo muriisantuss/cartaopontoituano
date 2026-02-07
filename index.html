@@ -86,8 +86,8 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDNAbGdw3dEcMKwhVpmuHFQRDRcNzUukt4",
@@ -105,9 +105,10 @@
         window.addDoc = addDoc;
         window.collection = collection;
         window.serverTimestamp = serverTimestamp;
+        
+        console.log("Firebase conectado com sucesso!");
     </script>
 
     <script src="script.js"></script>
 </body>
-
 </html>

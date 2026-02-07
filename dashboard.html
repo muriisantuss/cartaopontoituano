@@ -4,45 +4,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel do Líder - Ituano FC</title>
+    <title>Painel de Gestão - Ituano FC</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Bibliotecas Essenciais -->
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body class="dashboard-page">
 
     <div class="dashboard-container">
-        <header>
-            <h2 style="margin:0;">PAINEL DE GESTÃO</h2>
-            <small>Bem-vindo, Líder</small>
+        <header style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h2 style="margin:0; font-size:16px;">PAINEL DE GESTÃO</h2>
+                <small id="nome-lider-exibicao">Carregando...</small>
+            </div>
+            <button class="btn-clear" onclick="window.deslogar()" style="width: auto; padding: 5px 15px; font-size: 12px;">Sair ➜</button>
         </header>
 
         <nav class="filter-nav">
-            <button class="filter-btn active" onclick="filtrar('pendente')">Pendentes</button>
-            <button class="filter-btn" onclick="filtrar('assinado')">Assinados</button>
-            <button class="filter-btn" onclick="filtrar('enviado')">Enviados</button>
+            <button class="filter-btn active" onclick="window.filtrar('pendente')">Pendentes</button>
+            <button class="filter-btn" onclick="window.filtrar('assinado')">Assinados</button>
+            <button class="filter-btn" onclick="window.filtrar('enviado')">Enviados</button>
         </nav>
 
         <main id="cp-list" class="cp-list-grid">
-            <div class="cp-card">
-                <div class="card-info">
-                    <strong>João Silva</strong>
-                    <span>Enviado em: 07/02/2026 - 14:30</span>
-                </div>
-                <div class="card-actions">
-                    <button class="btn-small">Ver e Assinar</button>
-                </div>
-            </div>
+            <p style="text-align:center; color:#999; margin-top:20px;">Conectando ao banco...</p>
         </main>
+    </div>
 
-        <div class="btn-container" style="padding: 15px;">
-            <button class="btn btn-clear" onclick="window.location.href='index.html'">Sair</button>
+    <!-- Modal de Revisão e Assinatura -->
+    <div id="modal-assinatura" class="modal-overlay" style="display:none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <h3>Revisar e Assinar</h3>
+            
+            <div id="detalhes-cp" style="background:#f9f9f9; padding:15px; border-radius:5px; margin-bottom:15px; font-size:13px; color:#333; max-height: 300px; overflow-y: auto;">
+                <!-- O JS preenche aqui -->
+            </div>
+
+            <div class="signature-box">
+                <label style="display:block; text-align:left; font-weight:bold;">Assinatura do Líder:</label>
+                <div style="border: 2px dashed #ccc; background: #fff; margin-top: 5px;">
+                    <canvas id="canvas-lider" width="500" height="150" style="width: 100%; display: block;"></canvas>
+                </div>
+                <button class="btn-clear" style="margin-top:5px; width:auto;" onclick="window.limparAssinaturaLider()">Limpar Desenho</button>
+            </div>
+            
+            <div class="modal-actions" style="display: flex; gap: 10px; margin-top: 15px;">
+                <button class="btn btn-pdf" style="flex: 2;" onclick="window.confirmarAssinatura()">Confirmar Assinatura</button>
+                <button class="btn btn-clear" style="flex: 1;" onclick="window.fecharModal()">Cancelar</button>
+            </div>
         </div>
     </div>
 
-  <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-        import { getFirestore, collection, query, where, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+    <!-- Configuração Inline do Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, query, where, onSnapshot, doc, updateDoc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDNAbGdw3dEcMKwhVpmuHFQRDRcNzUukt4",
@@ -55,8 +76,11 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const auth = getAuth(app);
 
+        // Expondo ferramentas para o dashboard.js
         window.db = db;
+        window.auth = auth;
         window.collection = collection;
         window.query = query;
         window.where = where;
@@ -64,11 +88,19 @@
         window.doc = doc;
         window.updateDoc = updateDoc;
         window.deleteDoc = deleteDoc;
+        window.getDoc = getDoc;
+        window.signOut = signOut;
 
-        window.dispatchEvent(new Event('firebaseReady'));
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Dispara o evento para iniciar o dashboard.js
+                window.dispatchEvent(new Event('firebaseReady'));
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
     </script>
 
-    <script type="module" src="dashboard.js"></script>
+    <script src="dashboard.js"></script>
 </body>
-
 </html>

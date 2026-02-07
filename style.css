@@ -266,5 +266,55 @@ canvas {
     cursor: pointer;
 }
 
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.signature-box {
+    margin: 20px 0;
+    text-align: center;
+}
+
+#canvas-lider {
+    border: 2px dashed #ccc;
+    background: #fdfdfd;
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.btn-danger { background: #d32f2f !important; color: white; }
+.btn-gray { background: #666 !important; color: white; }
+
+.empty-msg {
+    text-align: center;
+    color: #999;
+    padding: 40px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+}
+
 
 
