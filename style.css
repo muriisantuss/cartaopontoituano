@@ -1,0 +1,194 @@
+:root {
+    --ituano-red: #d32f2f;
+    --ituano-black: #1a1a1a;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin: 0;
+}
+
+/* Área de acesso do líder */
+.leader-access {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+}
+
+.cp-container {
+    background: var(--white);
+    width: 100%;
+    max-width: 700px;
+    border: 1px solid #ccc;
+    padding-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    background: var(--ituano-black);
+    color: var(--white);
+    padding: 15px;
+    text-align: center;
+    border-bottom: 4px solid var(--ituano-red);
+}
+
+.section-title {
+    background: #f8f8f8;
+    color: #333;
+    padding: 8px 15px;
+    font-weight: 600;
+    margin: 15px 0 10px 0;
+    border-left: 5px solid var(--ituano-red);
+    font-size: 13px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 15px;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+.triple-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 3px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    outline: none;
+}
+
+.helper-text {
+    background: #fff5f5;
+    border: 1px dashed var(--ituano-red);
+    padding: 10px;
+    margin: 10px 15px;
+    font-size: 11px;
+    border-radius: 5px;
+    line-height: 1.5;
+}
+
+.signature-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 15px;
+    text-align: center;
+}
+
+canvas {
+    border: 1px solid #eee;
+    background: #fafafa;
+    width: 100%;
+    height: 120px;
+    border-radius: 5px;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.btn-container {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 700px;
+}
+
+.btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Poppins';
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.btn-pdf {
+    background: var(--ituano-red);
+    color: white;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+}
+
+.btn-clear {
+    background: #ebebeb;
+    color: #666;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    width: auto !important; /* Ajuste para o botão do líder */
+}
+
+@media (max-width: 480px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .full-width { grid-column: span 1; }
+    .triple-grid { grid-template-columns: 1fr !important; }
+    .signature-area { grid-template-columns: 1fr; }
+}
+
+/* Estilos específicos para a página de login */
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a1a;
+}
+
+.login-container {
+    background: var(--white);
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.login-container header {
+    padding: 30px 15px;
+}
+
+.form-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+
+
