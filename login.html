@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="login-page">
 
     <div class="login-container">
@@ -27,17 +29,43 @@
 
             <div class="btn-container" style="padding: 0;">
                 <button type="submit" class="btn btn-pdf">Entrar</button>
-                <button type="button" class="btn btn-clear" onclick="window.location.href='index.html'">Voltar ao Início</button>
+                <button type="button" class="btn btn-clear" onclick="window.location.href='index.html'">Voltar ao
+                    Início</button>
             </div>
         </form>
     </div>
 
-    <script>
-        document.getElementById('login-form').addEventListener('submit', function(e) {
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDNAbGdw3dEcMKwhVpmuHFQRDRcNzUukt4",
+            authDomain: "cp-digital-ituano.firebaseapp.com",
+            projectId: "cp-digital-ituano",
+            storageBucket: "cp-digital-ituano.firebasestorage.app",
+            messagingSenderId: "55279662139",
+            appId: "1:55279662139:web:d20a99e015631a45e0d81e"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Lógica de Login
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            // Aqui entrará a lógica de autenticação do Firebase
-            alert("Em breve: Integração com o Firebase para acesso ao Dashboard!");
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('password').value;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, senha);
+                window.location.href = 'dashboard.html'; // Sucesso!
+            } catch (error) {
+                alert("Erro ao acessar: Verifique e-mail e senha.");
+                console.error(error.code);
+            }
         });
     </script>
 </body>
+
 </html>

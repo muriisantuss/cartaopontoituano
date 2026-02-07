@@ -33,13 +33,13 @@
                 <label>Líder:</label>
                 <select id="lider" required>
                     <option value="">Selecione...</option>
+                    <option>Andre Iasi</option>
                     <option>Cristian Jiacomin Redondo Mendes</option>
                     <option>Geovana De Assis Camargo Medeiros</option>
                     <option>Gustavo Nakaoka</option>
                     <option>Henrique Nascimento Borges</option>
                     <option>Luiz Eduardo Bragatto Da Silva</option>
                     <option>Simone Aparecida Pereira Dias</option>
-                    <option>Shayene Aparecida Da Silva</option>
                 </select>
             </div>
         </div>
@@ -86,11 +86,9 @@
     </div>
 
     <script type="module">
-        // Importando o que precisamos
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
-        // Sua configuração
         const firebaseConfig = {
             apiKey: "AIzaSyDNAbGdw3dEcMKwhVpmuHFQRDRcNzUukt4",
             authDomain: "cp-digital-ituano.firebaseapp.com",
@@ -100,18 +98,14 @@
             appId: "1:55279662139:web:d20a99e015631a45e0d81e"
         };
 
-        // Inicializa o Firebase e o Banco de Dados
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Torna o "db" e as funções globais para o seu script.js conseguir usar
         window.db = db;
         window.addDoc = addDoc;
         window.collection = collection;
         window.serverTimestamp = serverTimestamp;
     </script>
-
-    <script src="script.js"></script>
 
     <script src="script.js"></script>
 </body>

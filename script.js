@@ -55,6 +55,8 @@ async function processPDF() {
         }
     }
 
+    await salvarNoFirebase();
+
     const doc = new jsPDF();
     const dataFormatada = formatarData(dataBruta);
 
