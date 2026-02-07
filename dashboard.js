@@ -139,24 +139,43 @@ window.prepararAssinatura = async (id) => {
     if (docSnap.exists()) {
         const dados = docSnap.data();
         const divDetalhes = document.getElementById('detalhes-cp');
-        
-        let html = `<strong>Colaborador:</strong> ${dados.colaborador}<br><br>`;
+
+        divDetalhes.style.maxHeight = "none"; 
+        divDetalhes.style.overflowY = "visible"; 
+
+        let html = `
+            <div style="text-align: left; font-family: 'Poppins', sans-serif;">
+                <div style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                    <span style="font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px;">Colaborador</span><br>
+                    <strong style="font-size: 18px; color: #1a1a1a;">${dados.colaborador}</strong>
+                </div>
+        `;
         
         if (dados.opcaoA && dados.opcaoA.data) {
             html += `
-                <strong>OPÇÃO A (Dia Único):</strong><br>
-                Data: ${dados.opcaoA.data.split('-').reverse().join('/')}<br>
-                Horário: ${dados.opcaoA.entrada} às ${dados.opcaoA.saida}<br>
-                <em>Justificativa: ${dados.opcaoA.justificativa}</em>
+                <div style="background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 12px; margin-bottom: 10px;">
+                    <strong style="color: #d32f2f; font-size: 12px; display: block; margin-bottom: 8px;">📍 OPÇÃO A (Dia Único)</strong>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px;">
+                        <div>📅 <strong>Data:</strong> ${dados.opcaoA.data.split('-').reverse().join('/')}</div>
+                        <div>⏰ <strong>Horário:</strong> ${dados.opcaoA.entrada} às ${dados.opcaoA.saida}</div>
+                    </div>
+                    <div style="margin-top: 8px; font-size: 13px; color: #444; border-top: 1px dashed #eee; padding-top: 5px;">
+                        <em>"${dados.opcaoA.justificativa}"</em>
+                    </div>
+                </div>
             `;
         }
         
         if (dados.opcaoB) {
             html += `
-                <strong>OPÇÃO B (Múltiplos Dias):</strong><br>
-                <div style="white-space: pre-wrap; border-left:3px solid #d32f2f; padding-left:10px;">${dados.opcaoB}</div>
+                <div style="background: #fff8f8; border-left: 4px solid #d32f2f; padding: 12px; border-radius: 4px; margin-bottom: 10px;">
+                    <strong style="color: #d32f2f; font-size: 12px; display: block; margin-bottom: 5px;">📝 OPÇÃO B (Múltiplos Dias)</strong>
+                    <div style="white-space: pre-wrap; font-size: 13px; line-height: 1.5; color: #333;">${dados.opcaoB}</div>
+                </div>
             `;
         }
+
+        html += `</div>`;
 
         divDetalhes.innerHTML = html;
         document.getElementById('modal-assinatura').style.display = 'flex';
