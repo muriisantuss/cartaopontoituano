@@ -14,6 +14,7 @@ function resizeCanvas() {
     if (signaturePad) signaturePad.clear();
 }
 window.onresize = resizeCanvas;
+window.addEventListener("orientationchange", resizeCanvas);
 resizeCanvas();
 
 function formatarData(dataISO) {

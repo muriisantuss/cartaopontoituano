@@ -6,6 +6,7 @@
 
 * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Remove flash azul no toque em Mobile */
 }
 
 body {
@@ -16,14 +17,17 @@ body {
     align-items: center;
     padding: 10px;
     margin: 0;
+    min-height: 100vh;
 }
 
+/* Área de acesso do líder */
 .leader-access {
     width: 100%;
     max-width: 700px;
     display: flex;
     justify-content: flex-end;
     margin-bottom: 5px;
+    padding-right: 5px;
 }
 
 .cp-container {
@@ -33,6 +37,7 @@ body {
     border: 1px solid #ccc;
     padding-bottom: 20px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 4px; 
 }
 
 header {
@@ -41,22 +46,23 @@ header {
     padding: 15px;
     text-align: center;
     border-bottom: 4px solid var(--ituano-red);
+    border-radius: 4px 4px 0 0;
 }
 
 .section-title {
     background: #f8f8f8;
     color: #333;
-    padding: 8px 15px;
+    padding: 10px 15px;
     font-weight: 600;
     margin: 15px 0 10px 0;
     border-left: 5px solid var(--ituano-red);
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 15px;
     padding: 0 15px;
 }
 
@@ -72,20 +78,22 @@ header {
 
 label {
     display: block;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     color: #444;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
 }
 
 input, select, textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px; /* Área de toque maior para mobile */
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 6px;
     font-family: 'Poppins', sans-serif;
-    font-size: 14px;
+    font-size: 14px; /* Desktop padrão */
     outline: none;
+    background: #fff;
+    appearance: none; /* Remove estilo nativo iOS */
 }
 
 /* Validação Visual */
@@ -96,29 +104,29 @@ input:invalid, select:invalid {
 .helper-text {
     background: #fff5f5;
     border: 1px dashed var(--ituano-red);
-    padding: 10px;
+    padding: 12px;
     margin: 10px 15px;
-    font-size: 11px;
-    border-radius: 5px;
+    font-size: 12px;
+    border-radius: 6px;
     line-height: 1.5;
 }
 
 .signature-area {
     display: grid;
-    grid-template-columns: 1fr; /* Apenas uma coluna agora */
+    grid-template-columns: 1fr;
     gap: 15px;
     padding: 15px;
     text-align: center;
 }
 
 canvas {
-    border: 1px solid #eee;
+    border: 2px dashed #ccc;
     background: #fafafa;
     width: 100%;
-    height: 120px;
-    border-radius: 5px;
+    height: 150px;
+    border-radius: 8px;
     cursor: crosshair;
-    touch-action: none;
+    touch-action: none; /* ESSENCIAL: Impede a tela de rolar ao assinar */
 }
 
 .btn-container {
@@ -128,18 +136,24 @@ canvas {
     gap: 10px;
     width: 100%;
     max-width: 700px;
+    margin-bottom: 20px;
 }
 
 .btn {
     width: 100%;
-    padding: 15px;
+    padding: 16px; /* Botão mais alto para o dedo */
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
     font-family: 'Poppins';
-    transition: 0.3s;
+    transition: 0.2s;
     text-transform: uppercase;
+    font-size: 14px;
+}
+
+.btn:active {
+    transform: scale(0.98);
 }
 
 .btn-pdf {
@@ -152,33 +166,34 @@ canvas {
 .btn-clear {
     background: #ebebeb;
     color: #666;
-    font-size: 12px;
     border: 1px solid #ddd;
     width: auto !important;
 }
 
-/* Modais e Overlays */
+/* --- MODAIS E OVERLAYS --- */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.85);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2000;
-    padding: 20px;
+    padding: 15px;
 }
 
 .modal-content {
     background: white;
-    padding: 25px;
+    padding: 20px;
     border-radius: 12px;
     width: 100%;
     max-width: 500px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    max-height: 90vh; /* Altura máxima da tela */
+    overflow-y: auto; /* Rolagem interna se for muito grande */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     text-align: center;
 }
 
@@ -186,29 +201,29 @@ canvas {
     display: flex;
     gap: 10px;
     margin-top: 20px;
+    flex-wrap: wrap; /* Botões quebram linha se faltar espaço */
+}
+
+.modal-actions .btn {
+    flex: 1;
+    min-width: 120px;
 }
 
 .success-message {
     color: #2e7d32;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 10px;
 }
 
-/* Responsividade */
-@media (max-width: 480px) {
-    .form-grid { grid-template-columns: 1fr; }
-    .full-width { grid-column: span 1; }
-    .triple-grid { grid-template-columns: 1fr !important; }
-}
-
-/* Estilos específicos para a página de login */
+/* --- LOGIN --- */
 .login-page {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #1a1a1a;
+    padding: 20px;
 }
 
 .login-container {
@@ -220,25 +235,23 @@ canvas {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 
-.login-container header {
-    padding: 30px 15px;
-}
-
 .form-body {
-    padding: 20px;
+    padding: 25px;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-/* Estilos para o Dashboard */
+/* --- DASHBOARD --- */
 .dashboard-container {
     background: var(--white);
     width: 100%;
     max-width: 800px;
-    min-height: 80vh;
+    min-height: 85vh;
     border: 1px solid #ccc;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 .filter-nav {
@@ -246,11 +259,12 @@ canvas {
     justify-content: space-around;
     background: #f8f8f8;
     border-bottom: 1px solid #ddd;
+    flex-wrap: wrap; /* Abas se ajustam */
 }
 
 .filter-btn {
     flex: 1;
-    padding: 15px;
+    padding: 15px 10px;
     border: none;
     background: none;
     font-family: 'Poppins';
@@ -258,105 +272,87 @@ canvas {
     cursor: pointer;
     color: #666;
     border-bottom: 3px solid transparent;
+    font-size: 13px;
+    white-space: nowrap;
 }
 
 .filter-btn.active {
     color: var(--ituano-red);
     border-bottom: 3px solid var(--ituano-red);
+    background: rgba(211, 47, 47, 0.05);
 }
 
 .cp-list-grid {
-    padding: 20px;
+    padding: 15px;
     display: grid;
-    grid-template-columns: 1fr; /* Lista vertical */
+    grid-template-columns: 1fr;
     gap: 15px;
+    flex: 1;
 }
 
+/* Cards Responsivos */
 .cp-card {
     border: 1px solid #eee;
     padding: 15px;
     border-radius: 8px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column; /* Mobile: Um embaixo do outro */
+    gap: 15px;
     background: #fff;
     transition: 0.2s;
-}
-
-.cp-card:hover {
-    border-color: var(--ituano-red);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
 .card-info {
     display: flex;
     flex-direction: column;
+    text-align: left;
 }
 
-.card-info span {
-    font-size: 11px;
-    color: #888;
-}
-
-.btn-small {
-    background: var(--ituano-black);
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-
-.modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-
-.signature-box {
-    margin: 20px 0;
-    text-align: center;
-}
-
-#canvas-lider {
-    border: 2px dashed #ccc;
-    background: #fdfdfd;
-    width: 100%;
-    height: 150px;
-    border-radius: 8px;
-    margin-top: 10px;
-}
-
-.btn-danger { background: #d32f2f !important; color: white; }
-.btn-gray { background: #666 !important; color: white; }
-
-.empty-msg {
-    text-align: center;
-    color: #999;
-    padding: 40px;
+.card-info strong {
+    font-size: 15px;
+    color: #333;
 }
 
 .card-actions {
     display: flex;
-    gap: 8px;
+    gap: 10px;
+    justify-content: flex-end;
+    width: 100%;
 }
 
+/* --- MEDIA QUERIES --- */
 
+/* Tablet e Desktop */
+@media (min-width: 600px) {
+    .cp-card {
+        flex-direction: row; /* Volta para o lado a lado */
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .card-actions {
+        width: auto;
+    }
+}
 
+/* Mobile Pequeno (Celulares em pé) */
+@media (max-width: 480px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .full-width { grid-column: span 1; }
+    .triple-grid { grid-template-columns: 1fr !important; }
+    
+    /* Evita zoom automático no iPhone */
+    input, select, textarea {
+        font-size: 16px !important; 
+    }
+    
+    .section-title {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+    
+    /* Proteção para iPhone X e superiores (Entalhe) */
+    body {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}

@@ -51,6 +51,9 @@ function resizeCanvasLider() {
     }
 }
 
+window.addEventListener('resize', resizeCanvasLider);
+window.addEventListener('orientationchange', resizeCanvasLider);
+
 // --- FILTRO ---
 window.filtrar = function(statusAlvo) {
     const lista = document.getElementById('cp-list');
