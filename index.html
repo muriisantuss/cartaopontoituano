@@ -1,182 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C.P. Digital - Ituano</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <style>
-        :root {
-            --ituano-red: #d32f2f;
-            --ituano-black: #1a1a1a;
-            --white: #ffffff;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f4f4f4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
-            margin: 0;
-        }
-
-        .cp-container {
-            background: var(--white);
-            width: 100%;
-            max-width: 700px;
-            border: 1px solid #ccc;
-            padding-bottom: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        header {
-            background: var(--ituano-black);
-            color: var(--white);
-            padding: 15px;
-            text-align: center;
-            border-bottom: 4px solid var(--ituano-red);
-        }
-
-        .section-title {
-            background: #f8f8f8;
-            color: #333;
-            padding: 8px 15px;
-            font-weight: 600;
-            margin: 15px 0 10px 0;
-            border-left: 5px solid var(--ituano-red);
-            font-size: 13px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            padding: 0 15px;
-        }
-
-        .full-width {
-            grid-column: span 2;
-        }
-
-        label {
-            display: block;
-            font-size: 11px;
-            font-weight: 600;
-            color: #444;
-            margin-bottom: 3px;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .helper-text {
-            background: #fff5f5;
-            border: 1px dashed var(--ituano-red);
-            padding: 10px;
-            margin: 10px 15px;
-            font-size: 11px;
-            border-radius: 5px;
-            line-height: 1.5;
-        }
-
-        .signature-area {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 15px;
-            text-align: center;
-        }
-
-        canvas {
-            border: 1px solid #eee;
-            background: #fafafa;
-            width: 100%;
-            height: 120px;
-            border-radius: 5px;
-            cursor: crosshair;
-            touch-action: none;
-        }
-
-        .btn-container {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
-            max-width: 700px;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-family: 'Poppins';
-            transition: 0.3s;
-            text-transform: uppercase;
-        }
-
-        .btn-pdf {
-            background: var(--ituano-red);
-            color: white;
-            font-size: 16px;
-            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
-        }
-
-        .btn-clear {
-            background: #ebebeb;
-            color: #666;
-            font-size: 12px;
-            border: 1px solid #ddd;
-        }
-
-        @media (max-width: 480px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .full-width {
-                grid-column: span 1;
-            }
-
-            .triple-grid {
-                grid-template-columns: 1fr !important;
-            }
-
-            .signature-area {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .triple-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-        }
-    </style>
 </head>
-
 <body>
+
+    <div class="leader-access">
+        <button class="btn btn-clear" onclick="window.location.href='login.html'">Líder</button>
+    </div>
 
     <div class="cp-container">
         <header>
@@ -230,12 +68,10 @@
         <div class="signature-area">
             <div>
                 <canvas id="signature-pad"></canvas>
-                <button type="button" class="btn btn-clear" style="margin-top: 5px;"
-                    onclick="signaturePad.clear()">Limpar Assinatura</button>
+                <button type="button" class="btn btn-clear" style="margin-top: 5px;" onclick="signaturePad.clear()">Limpar Assinatura</button>
                 <label style="margin-top:5px">ASSINATURA FUNCIONÁRIO</label>
             </div>
-            <div
-                style="display: flex; flex-direction: column; justify-content: flex-end; border-top: 1px solid #000; height: 120px; margin-top: 8px;">
+            <div style="display: flex; flex-direction: column; justify-content: flex-end; border-top: 1px solid #000; height: 120px; margin-top: 8px;">
                 <label>ASSINATURA DA GESTÃO</label>
             </div>
         </div>
@@ -245,110 +81,6 @@
         <button class="btn btn-pdf" onclick="processPDF()">BAIXAR E COMPARTILHAR PDF</button>
     </div>
 
-    <script>
-        const canvas = document.getElementById('signature-pad');
-        const signaturePad = new SignaturePad(canvas);
-
-        function resizeCanvas() {
-            const ratio = Math.max(window.devicePixelRatio || 1, 1);
-            canvas.width = canvas.offsetWidth * ratio;
-            canvas.height = canvas.offsetHeight * ratio;
-            canvas.getContext("2d").scale(ratio, ratio);
-            signaturePad.clear();
-        }
-        window.onresize = resizeCanvas;
-        resizeCanvas();
-
-        async function processPDF() {
-            const { jsPDF } = window.jspdf;
-            
-            const colab = document.getElementById('colaborador').value;
-            const lider = document.getElementById('lider').value;
-
-            if (colab.trim() === "") {
-                alert("O nome do colaborador é obrigatório.");
-                return;
-            }
-
-            if (lider === "") {
-                alert("Por favor, selecione um líder.");
-                return;
-            }
-
-            if (signaturePad.isEmpty()) {
-                alert("A assinatura é obrigatória. Por favor, assine antes de gerar o PDF.");
-                return;
-            }
-            
-            const doc = new jsPDF();
-
-            // Cabeçalho e Conteúdo do PDF
-            doc.setFillColor(26, 26, 26);
-            doc.rect(0, 0, 210, 30, 'F');
-            doc.setTextColor(255, 255, 255);
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(18);
-            doc.text("C.P. - COMUNICADO PESSOAL", 105, 15, { align: "center" });
-            doc.setFontSize(10);
-            doc.text("ITUANO FC - SISTEMA DIGITAL", 105, 22, { align: "center" });
-
-            doc.setTextColor(0, 0, 0);
-            doc.setFontSize(11);
-            doc.text(`Colaborador: ${colab}`, 20, 45);
-            doc.text(`Líder: ${lider}`, 20, 52);
-
-            doc.setFillColor(245, 245, 245);
-            doc.rect(20, 60, 170, 7, 'F');
-            doc.setFontSize(9);
-            doc.text("OPÇÃO A: AJUSTE DE DIA ÚNICO", 25, 65);
-            doc.setFontSize(10);
-            doc.text(`Data: ${document.getElementById('data_single').value} | Entrada: ${document.getElementById('ent_single').value} | Saída: ${document.getElementById('sai_single').value}`, 20, 73);
-            doc.text(`Justificativa: ${document.getElementById('just_single').value}`, 20, 79);
-
-            doc.setFillColor(245, 245, 245);
-            doc.rect(20, 90, 170, 7, 'F');
-            doc.setFontSize(9);
-            doc.text("OPÇÃO B: MÚLTIPLOS DIAS / PERÍODO", 25, 95);
-            doc.setFontSize(10);
-            const splitMulti = doc.splitTextToSize(document.getElementById('multi_ajustes').value, 170);
-            doc.text(splitMulti, 20, 103);
-
-            doc.setFontSize(9);
-            doc.text("MOVIMENTAÇÃO (Assinalar):", 20, 145);
-            doc.text("(  ) Abonar Horas    (  ) Compensar    (  ) Hora Extra", 20, 152);
-            doc.text("(  ) Banco de Horas  (  ) Descontar Horas (  ) Descontar + DSR", 20, 159);
-
-            if (!signaturePad.isEmpty()) {
-                const sigImg = signaturePad.toDataURL();
-                doc.addImage(sigImg, 'PNG', 30, 175, 50, 20);
-            }
-            doc.line(20, 200, 90, 200);
-            doc.text("Assinatura Funcionário", 35, 205);
-            doc.line(120, 200, 190, 200);
-            doc.text("Assinatura da Gestão", 135, 205);
-
-            const fileName = `CP_Ituano_${colab || 'Ponto'}.pdf`;
-
-            // 1. PRIMEIRO: Faz o Download
-            doc.save(fileName);
-
-            // 2. SEGUNDO: Tenta compartilhar via Mobile
-            if (navigator.share) {
-                try {
-                    const pdfBlob = doc.output('blob');
-                    const file = new File([pdfBlob], fileName, { type: 'application/pdf' });
-
-                    await navigator.share({
-                        files: [file],
-                        title: 'C.P. Ituano FC',
-                        text: `Olá, segue o Comunicado Pessoal de ${colab}`
-                    });
-                } catch (err) {
-                    console.log("Compartilhamento cancelado ou não suportado.");
-                }
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
-
 </html>
