@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Líder - Ituano FC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+
+    <div class="login-container">
+        <header>
+            <h2 style="margin:0; font-size: 18px;">ÁREA DO LÍDER</h2>
+            <small>Identifique-se para acessar os C.P.s</small>
+        </header>
+
+        <form id="login-form" class="form-body">
+            <div class="full-width">
+                <label>E-mail:</label>
+                <input type="email" id="email" placeholder="seu@email.com" required>
+            </div>
+            <div class="full-width">
+                <label>Senha:</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <div class="btn-container" style="padding: 0;">
+                <button type="submit" class="btn btn-pdf">Entrar</button>
+                <button type="button" class="btn btn-clear" onclick="window.location.href='index.html'">Voltar ao Início</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Aqui entrará a lógica de autenticação do Firebase
+            alert("Em breve: Integração com o Firebase para acesso ao Dashboard!");
+        });
+    </script>
+</body>
+</html>
