@@ -189,6 +189,82 @@ canvas {
     gap: 15px;
 }
 
+/* Estilos para o Dashboard */
+.dashboard-container {
+    background: var(--white);
+    width: 100%;
+    max-width: 800px;
+    min-height: 80vh;
+    border: 1px solid #ccc;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.filter-nav {
+    display: flex;
+    justify-content: space-around;
+    background: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+}
+
+.filter-btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background: none;
+    font-family: 'Poppins';
+    font-weight: 600;
+    cursor: pointer;
+    color: #666;
+    border-bottom: 3px solid transparent;
+}
+
+.filter-btn.active {
+    color: var(--ituano-red);
+    border-bottom: 3px solid var(--ituano-red);
+}
+
+.cp-list-grid {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr; /* Lista vertical */
+    gap: 15px;
+}
+
+.cp-card {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    transition: 0.2s;
+}
+
+.cp-card:hover {
+    border-color: var(--ituano-red);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-info span {
+    font-size: 11px;
+    color: #888;
+}
+
+.btn-small {
+    background: var(--ituano-black);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
 
 
 

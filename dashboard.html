@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Líder - Ituano FC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-page">
+
+    <div class="dashboard-container">
+        <header>
+            <h2 style="margin:0;">PAINEL DE GESTÃO</h2>
+            <small>Bem-vindo, Líder</small>
+        </header>
+
+        <nav class="filter-nav">
+            <button class="filter-btn active" onclick="filtrar('pendente')">Pendentes</button>
+            <button class="filter-btn" onclick="filtrar('assinado')">Assinados</button>
+            <button class="filter-btn" onclick="filtrar('enviado')">Enviados</button>
+        </nav>
+
+        <main id="cp-list" class="cp-list-grid">
+            <div class="cp-card">
+                <div class="card-info">
+                    <strong>João Silva</strong>
+                    <span>Enviado em: 07/02/2026 - 14:30</span>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-small">Ver e Assinar</button>
+                </div>
+            </div>
+        </main>
+
+        <div class="btn-container" style="padding: 15px;">
+            <button class="btn btn-clear" onclick="window.location.href='index.html'">Sair</button>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
