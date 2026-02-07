@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="dashboard-page">
 
     <div class="dashboard-container">
@@ -38,6 +40,35 @@
         </div>
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getFirestore, collection, query, where, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDNAbGdw3dEcMKwhVpmuHFQRDRcNzUukt4",
+            authDomain: "cp-digital-ituano.firebaseapp.com",
+            projectId: "cp-digital-ituano",
+            storageBucket: "cp-digital-ituano.firebasestorage.app",
+            messagingSenderId: "55279662139",
+            appId: "1:55279662139:web:d20a99e015631a45e0d81e"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Tornando as funções globais para o dashboard.js
+        window.db = db;
+        window.collection = collection;
+        window.query = query;
+        window.where = where;
+        window.onSnapshot = onSnapshot;
+        window.doc = doc;
+        window.updateDoc = updateDoc;
+        window.deleteDoc = deleteDoc;
+    </script>
+
+    <script src="dashboard.js"></script>
     <script src="dashboard.js"></script>
 </body>
+
 </html>

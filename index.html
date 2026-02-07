@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C.P. Digital - Ituano</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
+
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+
 <body>
 
     <div class="leader-access">
@@ -68,10 +70,12 @@
         <div class="signature-area">
             <div>
                 <canvas id="signature-pad"></canvas>
-                <button type="button" class="btn btn-clear" style="margin-top: 5px;" onclick="signaturePad.clear()">Limpar Assinatura</button>
+                <button type="button" class="btn btn-clear" style="margin-top: 5px;"
+                    onclick="signaturePad.clear()">Limpar Assinatura</button>
                 <label style="margin-top:5px">ASSINATURA FUNCIONÁRIO</label>
             </div>
-            <div style="display: flex; flex-direction: column; justify-content: flex-end; border-top: 1px solid #000; height: 120px; margin-top: 8px;">
+            <div
+                style="display: flex; flex-direction: column; justify-content: flex-end; border-top: 1px solid #000; height: 120px; margin-top: 8px;">
                 <label>ASSINATURA DA GESTÃO</label>
             </div>
         </div>
@@ -81,6 +85,35 @@
         <button class="btn btn-pdf" onclick="processPDF()">BAIXAR E COMPARTILHAR PDF</button>
     </div>
 
+    <script type="module">
+        // Importando o que precisamos
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+        // Sua configuração
+        const firebaseConfig = {
+            apiKey: "AIzaSyDNAbGdw3dEcMKwhVpmuHFQRDRcNzUukt4",
+            authDomain: "cp-digital-ituano.firebaseapp.com",
+            projectId: "cp-digital-ituano",
+            storageBucket: "cp-digital-ituano.firebasestorage.app",
+            messagingSenderId: "55279662139",
+            appId: "1:55279662139:web:d20a99e015631a45e0d81e"
+        };
+
+        // Inicializa o Firebase e o Banco de Dados
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Torna o "db" e as funções globais para o seu script.js conseguir usar
+        window.db = db;
+        window.addDoc = addDoc;
+        window.collection = collection;
+        window.serverTimestamp = serverTimestamp;
+    </script>
+
+    <script src="script.js"></script>
+
     <script src="script.js"></script>
 </body>
+
 </html>

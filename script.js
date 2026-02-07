@@ -20,7 +20,7 @@ resizeCanvas();
 
 async function processPDF() {
     const { jsPDF } = window.jspdf;
-    
+
     const colab = document.getElementById('colaborador').value;
     const lider = document.getElementById('lider').value;
     const dataBruta = document.getElementById('data_single').value;
@@ -38,7 +38,23 @@ async function processPDF() {
         alert("A assinatura é obrigatória. Por favor, assine antes de gerar o PDF.");
         return;
     }
-    
+
+    async function salvarNoFirebase(dados) {
+        try {
+            await window.addDoc(window.collection(window.db, "comunicados"), {
+                colaborador: colab,
+                lider: lider,
+                data: dataBruta,
+                justificativa: document.getElementById('just_single').value || "Não informada",
+                status: "pendente",
+                criadoEm: window.serverTimestamp()
+            });
+            console.log("Dados salvos no Firebase com sucesso!");
+        } catch (e) {
+            console.error("Erro ao salvar no banco: ", e);
+        }
+    }
+
     const doc = new jsPDF();
     const dataFormatada = formatarData(dataBruta);
 
