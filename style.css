@@ -384,3 +384,27 @@ canvas {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 .form-body { padding: 25px; display: flex; flex-direction: column; gap: 15px; }
+
+/* --- CSS DO OLHINHO DA SENHA --- */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px; /* Espaço para o ícone não ficar em cima do texto */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+    background: none;
+    border: none;
+    padding: 0;
+}
