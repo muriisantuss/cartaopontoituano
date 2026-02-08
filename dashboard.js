@@ -314,27 +314,31 @@ window.compartilharNativo = async (id) => {
     }
     const nomeFinal = `CP_Ituano_${nomeDois}_${dataFile}_${liderDois}.pdf`;
 
-    doc.save(nomeFinal);
-
-    if (navigator.share) {
+    if (navigator.share && navigator.canShare) {
         try {
             const pdfBlob = doc.output('blob');
             const file = new File([pdfBlob], nomeFinal, { type: 'application/pdf' });
-            await navigator.share({
-                files: [file],
-                title: 'CP Aprovado',
-                text: `Segue CP de ${dados.colaborador}`
-            });
-
-            await window.updateDoc(docRef, { status: 'enviado' });
-            alert("Enviado com sucesso!");
-            window.filtrar('assinado');
             
+            if (navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    files: [file],
+                    title: 'CP Aprovado',
+                    text: `Segue CP de ${dados.colaborador}`
+                });
+                
+                await window.updateDoc(docRef, { status: 'enviado' });
+                alert("Compartilhado com sucesso!");
+                window.filtrar('assinado');
+            } else {
+                throw new Error("Sistema não aceita arquivos.");
+            }
         } catch (err) {
-            console.log("Compartilhamento cancelado pelo usuário.");
+            console.log("Compartilhamento cancelado ou erro no Mobile:", err);
         }
     } else {
-        if(confirm("Arquivo baixado. Deseja marcar como ENVIADO?")) {
+        doc.save(nomeFinal);
+        
+        if(confirm("Arquivo baixado no PC. Deseja marcar como ENVIADO?")) {
             await window.updateDoc(docRef, { status: 'enviado' });
             window.filtrar('assinado');
         }
