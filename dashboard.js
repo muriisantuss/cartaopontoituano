@@ -298,7 +298,6 @@ window.gerarPDF = async (id, apenasVisualizar = false) => {
     }
 };
 
-// --- COMPARTILHAMENTO INTELIGENTE (Prioriza Download) ---
 window.compartilharNativo = async (id) => {
     const docRef = window.doc(window.db, "comunicados", id);
     const docSnap = await window.getDoc(docRef);
@@ -306,7 +305,6 @@ window.compartilharNativo = async (id) => {
     
     const doc = await criarDocumentoPDF(dados);
     
-    // NOME DO ARQUIVO
     const nomeDois = dados.colaborador.split(' ').slice(0, 2).join('');
     const liderDois = dados.lider.split(' ').slice(0, 2).join('');
     let dataFile = "Multi";
@@ -316,10 +314,8 @@ window.compartilharNativo = async (id) => {
     }
     const nomeFinal = `CP_Ituano_${nomeDois}_${dataFile}_${liderDois}.pdf`;
 
-    // 1. SEMPRE BAIXA O ARQUIVO (Garante no PC)
     doc.save(nomeFinal);
 
-    // 2. TENTA COMPARTILHAR (Se for mobile)
     if (navigator.share) {
         try {
             const pdfBlob = doc.output('blob');
@@ -329,19 +325,18 @@ window.compartilharNativo = async (id) => {
                 title: 'CP Aprovado',
                 text: `Segue CP de ${dados.colaborador}`
             });
-            // Se compartilhou, marca como enviado
+
             await window.updateDoc(docRef, { status: 'enviado' });
             alert("Enviado com sucesso!");
+            window.filtrar('assinado');
+            
         } catch (err) {
-            // Se cancelou o share mas já baixou, pergunta
-            if(confirm("Arquivo baixado. Deseja marcar como ENVIADO?")) {
-                await window.updateDoc(docRef, { status: 'enviado' });
-            }
+            console.log("Compartilhamento cancelado pelo usuário.");
         }
     } else {
-        // Se for PC (sem share), apenas confirma o envio
-        if(confirm("Arquivo baixado com sucesso. Deseja marcar como ENVIADO?")) {
+        if(confirm("Arquivo baixado. Deseja marcar como ENVIADO?")) {
             await window.updateDoc(docRef, { status: 'enviado' });
+            window.filtrar('assinado');
         }
     }
 };
