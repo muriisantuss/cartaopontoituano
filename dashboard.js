@@ -275,26 +275,61 @@ async function criarDocumentoPDF(dados) {
 }
 
 window.gerarPDF = async (id, apenasVisualizar = false) => {
-    const docRef = window.doc(window.db, "comunicados", id);
-    const docSnap = await window.getDoc(docRef);
-    const dados = docSnap.data();
-    
-    const doc = await criarDocumentoPDF(dados);
-
-    // Nome do Arquivo
-    const nomeDois = dados.colaborador.split(' ').slice(0, 2).join('');
-    const liderDois = dados.lider.split(' ').slice(0, 2).join('');
-    let dataFile = "Multi";
-    if (dados.opcaoA && dados.opcaoA.data) {
-        const partes = dados.opcaoA.data.split('-');
-        dataFile = `${partes[2]}-${partes[1]}`;
-    }
-    const nomeFinal = `CP_Ituano_${nomeDois}_${dataFile}_${liderDois}.pdf`;
-
+    let novaJanela = null;
     if (apenasVisualizar) {
-        window.open(doc.output('bloburl'), '_blank');
-    } else {
-        doc.save(nomeFinal);
+        novaJanela = window.open('', '_blank');
+        
+        if (novaJanela) {
+            novaJanela.document.write(`
+                <html>
+                    <head><title>Carregando...</title></head>
+                    <body style="display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif; background:#333; color:#fff;">
+                        <div style="text-align:center;">
+                            <h3>Visualizando documento...</h3>
+                            <p>Aguarde um instante.</p>
+                        </div>
+                    </body>
+                </html>
+            `);
+        }
+    }
+
+    try {
+        const docRef = window.doc(window.db, "comunicados", id);
+        const docSnap = await window.getDoc(docRef);
+        const dados = docSnap.data();
+        
+        // Chama sua função auxiliar que desenha o PDF
+        const doc = await criarDocumentoPDF(dados);
+
+        // Gera o nome do arquivo
+        const nomeDois = dados.colaborador.split(' ').slice(0, 2).join('');
+        const liderDois = dados.lider.split(' ').slice(0, 2).join('');
+        let dataFile = "Multi";
+        if (dados.opcaoA && dados.opcaoA.data) {
+            const partes = dados.opcaoA.data.split('-');
+            dataFile = `${partes[2]}-${partes[1]}`;
+        }
+        const nomeFinal = `CP_Ituano_${nomeDois}_${dataFile}_${liderDois}.pdf`;
+
+        if (apenasVisualizar) {
+            const blob = doc.output('blob');
+            const url = URL.createObjectURL(blob);
+
+            if (novaJanela) {
+                // 2. Redireciona a janela que já abrimos para o PDF final
+                novaJanela.location.href = url;
+            } else {
+                // Fallback para navegadores que bloquearam o primeiro popup (raro)
+                window.open(url, '_blank');
+            }
+        } else {
+            doc.save(nomeFinal);
+        }
+    } catch (e) {
+        console.error(e);
+        if (novaJanela) novaJanela.close(); // Fecha a janela se der erro
+        alert("Erro ao gerar PDF. Verifique sua conexão.");
     }
 };
 
