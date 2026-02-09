@@ -7,7 +7,8 @@
     <title>C.P. Digital - Ituano</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-
+    <link rel="icon" type="image/png" sizes="32x32" href="./Ituano_logo.svg">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -88,7 +89,8 @@
     <div id="modal-revisao" class="modal-overlay" style="display:none;">
         <div class="modal-content">
             <h3>Confirme seus dados</h3>
-            <div id="resumo-dados" style="text-align:left; background:#f9f9f9; padding:15px; border-radius:5px; margin:15px 0; font-size:13px;">
+            <div id="resumo-dados"
+                style="text-align:left; background:#f9f9f9; padding:15px; border-radius:5px; margin:15px 0; font-size:13px;">
                 <!-- JS Preenche -->
             </div>
             <div class="modal-actions">
@@ -105,7 +107,7 @@
             <h3 class="success-message">Enviado com Sucesso!</h3>
             <p>Seu líder já recebeu o comunicado.</p>
             <p style="font-size:12px; color:#666;">Deseja baixar uma cópia para você?</p>
-            
+
             <div class="modal-actions" style="flex-direction: column;">
                 <button class="btn btn-pdf" onclick="baixarCopiaPDF()">BAIXAR CÓPIA PDF</button>
                 <button class="btn btn-clear" onclick="location.reload()">Novo Formulário</button>
@@ -137,4 +139,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
